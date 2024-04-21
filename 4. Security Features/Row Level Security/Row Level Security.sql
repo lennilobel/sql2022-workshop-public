@@ -169,7 +169,7 @@ INSERT Sales VALUES
 	(6, 'SalesUser2', 'Seat', 5)
 
 -- Create the shared database user
-CREATE LOGIN AppLogin WITH PASSWORD = '[PASSWORD]';
+CREATE LOGIN AppLogin WITH PASSWORD = '[PASSWORD]'
 GO 
 CREATE USER AppUser FOR LOGIN AppLogin
 GO
