@@ -70,7 +70,7 @@ GO
 BACKUP CERTIFICATE MyEncryptionCert TO FILE='C:\Demo\Backups\MyEncryptionCert.certbak'
  WITH PRIVATE KEY (
   FILE='C:\Demo\Backups\MyEncryptionCert.pkbak', 
-  ENCRYPTION BY PASSWORD='Pr!vK3yP@ssw0rd')
+  ENCRYPTION BY PASSWORD='[PASSWORD]')
  
 -- To restore certificate and backup on another server  
 USE master
@@ -90,7 +90,7 @@ CREATE CERTIFICATE MyEncryptionCert
  FROM FILE='C:\Demo\Backups\MyEncryptionCert.certbak'
  WITH PRIVATE KEY(
   FILE='C:\Demo\Backups\MyEncryptionCert.pkbak',
-  DECRYPTION BY PASSWORD='Pr!vK3yP@ssw0rd')
+  DECRYPTION BY PASSWORD='[PASSWORD]')
 
 GO
 

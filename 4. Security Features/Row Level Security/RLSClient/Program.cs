@@ -7,7 +7,7 @@ namespace RLSClient
 	internal class Program
 	{
 		private const string ConnStr =
-			"data source=.;initial catalog=MyDB;uid=AppLogin;pwd=[PASSWORD]';Trust Server Certificate=True;";
+			"data source=.;initial catalog=MyDB;uid=AppLogin;pwd=[PASSWORD];Trust Server Certificate=True;";
 
 		private static string _username;
 
