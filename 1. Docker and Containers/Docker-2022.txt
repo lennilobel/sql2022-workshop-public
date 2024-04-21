@@ -1,0 +1,220 @@
+/* Prep */
+
+docker pull ubuntu
+docker pull mcr.microsoft.com/mssql/server:2017-latest
+docker pull mcr.microsoft.com/mssql/server:2019-latest
+docker pull mcr.microsoft.com/mssql/server:2022-latest
+
+- Delete everything out of c:\temp
+
+
+/* Intro */
+
+cmd.exe
+
+cd \temp
+
+docker
+
+docker images
+
+docker ps
+
+docker run ubuntu bash
+
+docker ps
+
+docker ps --help
+
+docker ps -a
+
+docker run --help
+
+docker run -it ubuntu bash
+dir
+mkdir demo
+dir
+cd demo
+cat > myfile.txt
+This is my important content
+Don't lose it!
+[CTRL+D]
+dir
+cat myfile.txt
+exit
+
+docker ps		(no containers running)
+
+docker ps -a	(it's there, exited, along with the previous one that started and immediately stopped)
+
+docker run -it ubuntu bash
+- will I see the demo folder? No, this is a new continer
+
+dir
+
+exit
+
+docker ps -a				(now there are 3, second one has demo folder)
+
+docker start ##				(start the second one)
+
+docker ps -a				(it's running)
+
+docker exec -it ## bash		(back in second container)
+
+dir							(demo folder is there)
+cd demo
+cat myfile.txt
+
+exit						(leave container)
+
+docker ps -a				(is it still running? yes, because start/stop vs. run)
+
+docker exec -it ## bash		(right back in)
+
+dir
+
+exit
+
+docker ps -a				(three containers)
+
+docker rm ## ##				(remove first and third container, ??? see the storage disappear from file system)
+
+docker ps -a				(just one running container)
+
+docker rm ##				(try to delete running container; can't)
+
+docker stop ##				(could delete it by mistake now, but we'll commit it instead)
+
+docker images				(same images as before)
+
+docker commit ##
+
+docker images
+
+docker tag ## lennis-image	(all lower case)
+
+docker images
+
+docker run -it lennis-image bash
+
+dir
+cd demo
+dir
+cat myfile.txt
+exit
+
+docker ps -a
+
+docker rm ## ##				(remove both containers)
+
+docker images
+
+docker rmi lennis-image		(remove new image)
+
+- show lifecycle slide
+
+
+/* Volume mounting */
+
+docker run --help			(show -v commands)
+
+docker run -it -v c:\temp:/tempvol ubuntu bash
+
+dir
+cd tempvol
+dir
+cat > fromcontainer.txt
+This content is stored outside
+the container, on the host.
+[CTRL+D]
+dir
+cat fromcontainer.txt
+
+- view on Host
+   copy file on Host as fromhost.txt
+   edit as "Content created from host" + NEW LINE
+   view back in container
+
+dir
+
+cat fromhost.txt
+
+exit
+
+- cleanup containers
+
+
+/* SQL Server 2017 */
+
+docker run --help			(show -d and -p commands)
+
+docker run -d -v c:\temp:/tempvol -p 1401:1433 mcr.microsoft.com/mssql/server:2017-latest
+
+docker ps -a				(repeat, up for a while, then crashes)
+
+docker logs ##				(need the EULA)
+
+- https://hub.docker.com/_/microsoft-mssql-server
+
+docker run -d -v c:\temp:/tempvol -p 1401:1433 -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Big$ecret123" mcr.microsoft.com/mssql/server:2017-latest
+
+docker logs ##				(keep hitting... shows all good)
+
+- SSMS, connect to "localhost,1401"
+   no databases of course
+
+- Attach
+   navigating the container file system of course
+
+- Copy AW db files (.mdf, .ldf, and .bak)
+
+- Attach AdventureWorks2019.mdf from "/tempvol"
+   Fails, because this database works only on 2019+
+
+- Attach AdventureWorks2017.mdf from "/tempvol"
+   See data!
+
+
+/* SQL Server 2019 */
+
+docker run -d -v c:\temp:/tempvol -p 1402:1433 -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Big$ecret123" mcr.microsoft.com/mssql/server:2019-latest
+
+- SSMS, connect to "localhost,1402"
+   no databases of course
+
+- Attach AdventureWorks2019.mdf from "/tempvol"
+   See data!
+
+
+/* SQL Server 2022 */
+
+docker run -d -v c:\temp:/tempvol -p 1403:1433 -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Big$ecret123" mcr.microsoft.com/mssql/server:2022-latest
+
+docker ps		(all three are running)
+
+- SSMS, connect to "localhost,1403"
+
+- Restore AdventureWorks2019.bak from "/tempvol"
+   See data!
+
+
+/* Custom dockerfile with PolyBase and FTS */
+
+docker build -t sql2019-pb-fts .
+docker build -t sql2022-pb-fts .
+
+docker run -d -v c:\temp:/tempvol -p 1402:1433 -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Big$ecret123" sql2019-pb-fts
+docker run -d -v c:\temp:/tempvol -p 1403:1433 -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Big$ecret123" sql2022-pb-fts
+
+/* Edit WSL configuration to limit memory consumption for the vmmem process */
+
+https://itnext.io/wsl2-tips-limit-cpu-memory-when-using-docker-c022535faf6f
+
+wsl --shutdown
+notepad c:\users\lenni.wslconfig
+
+ [wsl2]
+ memory=3GB   # Limits VM memory in WSL 2 up to 3GB
+ processors=4 # Makes the WSL 2 VM use two virtual processors
+

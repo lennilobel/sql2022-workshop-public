@@ -1,0 +1,200 @@
+{
+	"$schema": "https://github.com/Azure/data-api-builder/releases/download/v0.6.13/dab.draft.schema.json",
+	"data-source": {
+		"database-type": "mssql",
+		"options": {
+			"set-session-context": true
+		},
+		"connection-string": "[CONNECTION-STRING]"
+	},
+	"runtime": {
+		"rest": {
+			"enabled": true,
+			"path": "/api"
+		},
+		"graphql": {
+			"allow-introspection": true,
+			"enabled": true,
+			"path": "/graphql"
+		},
+		"host": {
+			"mode": "development",
+			"cors": {
+				"origins": [],
+				"allow-credentials": false
+			},
+			"authentication": {
+
+				//// --- Azure Static Web Apps (EasyAuth)
+				//"provider": "StaticWebApps"
+
+				//// --- Azure App Service
+				//"provider": "AppService"
+
+				//// --- Simulator
+				//"provider": "Simulator"
+
+				//// --- Azure Active Directory
+				//"provider": "AzureAD",
+				//"jwt": {
+				//	"issuer": "https://login.microsoftonline.com/d094d040-1e16-4c87-9d7e-ba1b8efa9b29/v2.0",
+				//	"audience": "ebe1e801-3ce2-4c70-ba3b-b6d3008532e0"
+				//}
+
+			}
+		}
+	},
+	"entities": {
+		"Author": {
+			"source": "dbo.Author",
+			"permissions": [
+				{
+					"role": "anonymous",
+					"actions": [
+						"*"
+					]
+				}
+			],
+			"relationships": {
+				"Books": {
+					"cardinality": "many",
+					"target.entity": "Book",
+					"linking.object": "dbo.BookAuthor"
+				}
+			}
+		},
+		"Book": {
+			"source": "dbo.Book",
+			"permissions": [
+
+				//// --- With no authentication
+				//{
+				//	// Anonymous users have full CRUD access to all books
+				//	"role": "anonymous",
+				//	"actions": [
+				//		"*"
+				//	]
+				//}
+
+				//// --- With simple (non-role based) authentication
+				//{
+				//	// Authenticated users have full CRUD access to all books
+				//	"role": "authenticated",
+				//	"actions": [
+				//		"*"
+				//	]
+				//},
+				//{
+				//	// Anonymous users only have read access to books published from 2000 and later
+				//	"role": "anonymous",
+				//	"actions": [
+				//		{
+				//			"action": "Read",
+				//			"policy": {
+				//				"database": "@item.Year ge 2000"
+				//			}
+				//		}
+				//	]
+				//}
+
+				//// --- With Azure AD authentication
+				//{
+				//	// Authenticated users assigned to the Book.Reader role can read (but not update) books
+				//	"role": "Book.Reader",
+				//	"actions": [ "read" ]
+				//},
+				//{
+				//	// Authenticated users assigned to the Book.Librarian role have full access (read/update) to books
+				//	"role": "Book.Librarian",
+				//	"actions": [ "*" ]
+				//}
+				//	// Anonymous users have no access to books
+			
+			],
+			"relationships": {
+				"Authors": {
+					"cardinality": "many",
+					"target.entity": "Author",
+					"linking.object": "dbo.BookAuthor"
+				}
+			}
+		},
+		"BookDetail": {
+			"source": {
+				"type": "view",
+				"object": "dbo.vwBookDetails",
+				"key-fields": [
+					"BookId"
+				]
+			},
+			"permissions": [
+				{
+					"role": "anonymous",
+					"actions": [
+						"*"
+					]
+				}
+			]
+		},
+		"GetBooksCowrittenByAuthor": {
+			"source": {
+				"type": "stored-procedure",
+				"object": "dbo.GetBooksCowrittenByAuthor",
+				"parameters": {
+					"SearchType": "C",
+					"Author": ""
+				}
+			},
+			"permissions": [
+				{
+					"role": "anonymous",
+					"actions": [
+						"execute"
+					]
+				}
+			],
+			"rest": {
+				"methods": [
+					"get",
+					"post"
+				]
+			},
+			"graphql": {
+				"operation": "query"
+			}
+		},
+		"Branch": {
+			"source": "dbo.Branch",
+			"permissions": [
+				{
+					"role": "anonymous",
+					"actions": [
+						"*"
+					]
+				}
+			]
+		},
+		"GetSessionContextValues": {
+			"source": {
+				"type": "stored-procedure",
+				"object": "dbo.GetSessionContextValues"
+			},
+			"permissions": [
+				{
+					"role": "anonymous",
+					"actions": [
+						"execute"
+					]
+				}
+			],
+			"rest": {
+				"methods": [
+					"get"
+				]
+			},
+			"graphql": {
+				"operation": "query"
+			}
+		}
+	}
+}

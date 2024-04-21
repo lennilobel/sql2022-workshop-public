@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<!-- http://localhost:5081/StaticFiles/HomePage.html (using Guest browser) -->
+<html>
+<head>
+	<title>Bing Maps Mashup</title>
+	<meta charset="utf-8" />
+	<script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=getMap'></script>
+	<script type="text/javascript">
+		var _map;
+		function getMap() {
+			_map = new Microsoft.Maps.Map('#divMap', {
+				zoom: 4,
+				center: new Microsoft.Maps.Location(39.5, -98.35),
+				credentials: 'Amcr1F6VCLNYStQHbqgiqT_1g1NdG5IZW9Lk3SI_feAibqpDennFyZyxSSfaoIuJ'
+			});
+		}
+		function mapCustomers() {
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "/api/customerGeo", true);
+			xhr.onload = function () {
+				var results = JSON.parse(xhr.responseText);
+				_map.entities.clear();
+				for (i = 0; i < results.length; i++) {
+					var loc = new Microsoft.Maps.Location(results[i].latitude, results[i].longitude);
+					var pin = new Microsoft.Maps.Pushpin(loc, { title: results[i].company });
+					_map.entities.push(pin);
+				}
+			};
+			xhr.send();
+		}
+	</script>
+</head>
+<body>
+	<button onclick="mapCustomers()" style="margin: 8px;">
+		Get Customers
+	</button>
+	<div>
+		<div id='divMap' style="position: relative; width: 100%; height: 600px; border: 1px solid gray;" />
+	</div>
+</body>
+</html>

@@ -1,0 +1,201 @@
+:========================================================================
+: Cosmos DB
+:========================================================================
+
+:........................................................................
+: *** Create container ***
+
+: Run 'DabCreateCosmosDatabase'
+
+
+:........................................................................
+: *** Initialize the configuration file ***
+
+md c:\temp\cosmos
+cd c:\temp\cosmos
+
+: Copy GraphQL schema file
+copy "C:\Projects\Sleek\SQL2022 Workshop\3. Development Platform\Data API Builder\DAB - Azure Cosmos DB\library-schema.gql" c:\temp\cosmos
+
+: Create dab-config.json file
+dab init --database-type "cosmosdb_nosql" --graphql-schema library-schema.gql --cosmosdb_nosql-database Library --connection-string "[CONNECTION-STRING]" --host-mode "Development"
+
+
+:........................................................................
+: *** Querying containers ***
+
+: Add entity for the books container
+dab add Book --source books --permissions "anonymous:*"
+dab add Author --source books --permissions "anonymous:*"
+
+dab start
+
+: https://localhost:5001/graphql
+:	Opens "Banana Cake Pop"
+:		A "GraphQL IDE"
+:	Click "Browse schema", and "Apply"
+:		Opens new tab on "Schema Reference" section
+:	On "Query" under Types
+:		See Query operations for Book and Author
+:		Notice pagination, filter, and orderBy controls
+:	Click "Mutation" under Types
+:		See CUD operations for Book and Author
+
+: Switch to Postman
+:	For GraphQL, can run queries and mutations same as Banana Cake Pop
+:
+: Run "Querying containers" Postman demos
+
+
+:........................................................................
+: *** Updating containers ***
+
+: Run "Updating containers" Postman demos
+
+
+:========================================================================
+: Security
+:========================================================================
+
+:........................................................................
+: *** Simple (non-role based) authentication with StaticWebApps and Simulator ***
+
+: Change book permissions
+:  Replace anonymous role name as "authenticated", and append a comma to add the revised "anonymous" role:
+
+	{
+		"role": "anonymous",
+		"actions": [
+			{
+				"action": "Read",
+				"policy": {
+					"database": "@item.year ge 2000"
+				}
+			}
+		]
+	}
+
+dab start
+
+: Run Postman demos
+:	"Get all books", can still see books, but only because item policies aren't yet supported for Cosmos
+:	"Create a book", fails with unauthorized
+
+
+: Change runtime host authentication
+:  Replace "StaticWebApps" with "Simulator"
+
+dab start
+
+: Run Postman demos (REST & GraphQL)
+:	"Get all books", can see all books
+:	"Create a book", succeeds, creates book ID B1021
+:	"Delete a book", succeeds, deletes book ID B1021
+
+
+:........................................................................
+: *** Azure AD ***
+
+: Change runtime host authentication
+:  Replace "Simulator" with "AzureAD", and add the "jwt" property beneath "provider"
+
+	"jwt": {
+		"issuer": "https://login.microsoftonline.com/d094d040-1e16-4c87-9d7e-ba1b8efa9b29/v2.0",
+		"audience": "ebe1e801-3ce2-4c70-ba3b-b6d3008532e0"
+	}
+
+: Change book permissions
+:  Replace existing roles with:
+
+	{
+		"role": "Book.Reader",
+		"actions": [ "read" ]
+	},
+	{
+		"role": "Book.Librarian",
+		"actions": [ "*" ]
+	}
+
+dab start
+
+: Run Postman demos (REST, anonymous)
+:	"Get all books", fails with not authorized
+:	"Create a book", fails with not authorized
+:	"Get all authors", succeeds (unsecured entity)
+
+: AD configuration in Azure portal
+:	Switch to DAB Library directory
+:	Open Azure Active Directory page
+:	Click App registrations on sidebar
+:		Click Data API Builder Demo
+:		Click App roles on sidebar
+:		Note two roles
+:			Book Readers (Book.Reader)
+:			Book Librarians (Book.Librarian)
+:		Click browser back
+:		Click Expose an API on sidebar
+:			Click the scope
+:			Note full scope name (we will request a token for this scope)
+:				api://ebe1e801-3ce2-4c70-ba3b-b6d3008532e0/Endpoint.Access
+:		Click browser back 2x
+:	Click Enterprise applications on sidebar
+:		Click Data API Builder Demo
+:		Click Users and groups on sidebar
+:		Note two users with different roles
+:			Jim Librarian
+:			Joe Reader
+
+: New Azure CLI command prompt
+
+: Login as Joe Reader (UID=joe.reader@dablibrary.onmicrosoft.com, PWD=JoeLikesToRead!!)
+az login --allow-no-subscriptions --scope api://ebe1e801-3ce2-4c70-ba3b-b6d3008532e0/Endpoint.Access
+
+: Obtain an access token
+az account get-access-token --scope api://ebe1e801-3ce2-4c70-ba3b-b6d3008532e0/Endpoint.Access
+
+: Decode token in https://jwt.ms/
+:	Notice Book.Reader in the roles claim
+
+: Run Postman demos
+:	Open "Get all books"
+:		Click Headers
+:			Check Authorization and paste in the bearer token over ey...
+:			Check X-MS-API-ROLE and paste in Book.Reader over ...
+:		Run it
+:			Succeeds, returns all books
+:	Open "Create a book"
+:		Click Headers
+:			Check Authorization and paste in the bearer token over ey...
+:			Check X-MS-API-ROLE and paste in Book.Reader over ...
+:		Run it
+:			Fails with not authorized
+:		Change X-MS-API-ROLE to Book.Librarian
+:		Run it
+:			Fails with 403 (but without JSON response; user doesn't have that role assignment)
+
+: Logout Joe Reader
+az logout
+
+: Login as Jim Librarian (UID=jim.librarian@dablibrary.onmicrosoft.com, PWD=JimWorksAtTheLibrary!!)
+az login --allow-no-subscriptions --scope api://ebe1e801-3ce2-4c70-ba3b-b6d3008532e0/Endpoint.Access
+
+: Obtain an access token
+az account get-access-token --scope api://ebe1e801-3ce2-4c70-ba3b-b6d3008532e0/Endpoint.Access
+
+: Decode token in https://jwt.ms/
+:	Notice Book.Librarian in the roles claim
+
+: Run Postman demos
+:	Open "Get all books"
+:		Click Headers
+:			For Authorization, replace bearer token
+:			For X-MS-API-ROLE, replace with Book.Librarian
+:		Run it
+:			Succeeds, returns all books
+:	Open "Create a book"
+:		Click Headers
+:			For Authorization, replace bearer token
+:			For X-MS-API-ROLE, still set to Book.Librarian from previous attempt
+:		Run it
+:			Succeeds, creates book ID B1021
+ 

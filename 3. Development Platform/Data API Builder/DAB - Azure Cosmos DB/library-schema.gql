@@ -1,0 +1,26 @@
+﻿type Book @model {
+  id: ID
+  type: String
+  title: String
+  year: Int
+  pages: Int
+  authors: [BookAuthor]
+}
+
+type BookAuthor {
+  id: ID
+  firstName: String
+  middleName: String
+  lastName: String
+}
+
+type Author @model {
+  id: ID
+  type: String
+  firstName: String
+  middleName: String
+  lastName: String
+  dob: String
+  email: String
+  bio: String
+}

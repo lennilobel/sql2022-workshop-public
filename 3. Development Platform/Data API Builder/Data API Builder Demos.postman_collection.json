@@ -1,0 +1,1607 @@
+{
+	"info": {
+		"_postman_id": "81f327dd-e3cb-43f1-a798-07d00b21d329",
+		"name": "Data API Builder Demos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SQL Server and Azure SQL",
+			"item": [
+				{
+					"name": "Querying tables",
+					"item": [
+						{
+							"name": "REST",
+							"item": [
+								{
+									"name": "Get all books",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer ey...",
+												"type": "default",
+												"disabled": true
+											},
+											{
+												"key": "X-MS-API-ROLE",
+												"value": "...",
+												"type": "default",
+												"disabled": true
+											}
+										],
+										"url": {
+											"raw": "https://localhost:5001/api/Book",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Book"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get all authors",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/Author",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Author"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get book by ID",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/Book/BookId/1017",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Book",
+												"BookId",
+												"1017"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get all books sorted by pages, title",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/Book?$orderby=Pages asc, Title asc",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Book"
+											],
+											"query": [
+												{
+													"key": "$orderby",
+													"value": "Pages asc, Title asc"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get all book titles sorted by pages, title",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/Book?$orderby=Pages asc, Title asc&$select=Title",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Book"
+											],
+											"query": [
+												{
+													"key": "$orderby",
+													"value": "Pages asc, Title asc"
+												},
+												{
+													"key": "$select",
+													"value": "Title"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get all book titles sorted by title",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/Book?$orderby=Title asc&$select=Title",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Book"
+											],
+											"query": [
+												{
+													"key": "$orderby",
+													"value": "Title asc"
+												},
+												{
+													"key": "$select",
+													"value": "Title"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get book titles filtered and sorted by pages",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5000/api/Book?$filter=Pages gt 500&$orderby=Pages&$select=Title",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Book"
+											],
+											"query": [
+												{
+													"key": "$filter",
+													"value": "Pages gt 500"
+												},
+												{
+													"key": "$orderby",
+													"value": "Pages"
+												},
+												{
+													"key": "$select",
+													"value": "Title"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get book titles filtered by complex expression",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5000/api/Book?$filter=(Year ge 1970 or Title eq 'Foundation') and Pages gt 250",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Book"
+											],
+											"query": [
+												{
+													"key": "$filter",
+													"value": "(Year ge 1970 or Title eq 'Foundation') and Pages gt 250"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get books with pagination",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5000/api/Book?$first=10",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Book"
+											],
+											"query": [
+												{
+													"key": "$first",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "GraphQL",
+							"item": [
+								{
+									"name": "Get all books",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "graphql",
+											"graphql": {
+												"query": "query {\r\n    books {\r\n        items {\r\n            BookId\r\n            Title\r\n            Year\r\n            Pages\r\n        }\r\n    }\r\n}\r\n",
+												"variables": ""
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/graphql",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"graphql"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get all authors",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "graphql",
+											"graphql": {
+												"query": "query {\r\n    authors {\r\n        items {\r\n            AuthorId\r\n            FirstName\r\n            MiddleName\r\n            LastName\r\n            Dob\r\n            Email\r\n            Bio\r\n        }\r\n    }\r\n}\r\n",
+												"variables": ""
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/graphql",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"graphql"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get book by ID",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "graphql",
+											"graphql": {
+												"query": "query {\r\n    book_by_pk(BookId: 1002) {\r\n        BookId\r\n        Title\r\n        Year\r\n        Pages\r\n    }\r\n}\r\n",
+												"variables": ""
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/graphql",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"graphql"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get book by title",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "graphql",
+											"graphql": {
+												"query": "query {\r\n    books(filter: { Title: { eq: \"Foundation\" } }) {\r\n        items {\r\n            BookId\r\n            Title\r\n            Year\r\n            Pages\r\n        }\r\n    }\r\n}\r\n",
+												"variables": ""
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/graphql",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"graphql"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get all books sorted by pages, title",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "graphql",
+											"graphql": {
+												"query": "query {\r\n    books(orderBy: { Pages: ASC, Title: ASC }) {\r\n        items {\r\n            BookId\r\n            Title\r\n            Year\r\n            Pages\r\n        }\r\n    }\r\n}\r\n",
+												"variables": ""
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/graphql",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"graphql"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get books with pagination",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "graphql",
+											"graphql": {
+												"query": "query {\r\n    books(first: 10, after: null) {\r\n        items {\r\n            BookId\r\n            Title\r\n            Year\r\n            Pages\r\n        }\r\n        hasNextPage\r\n        endCursor\r\n    }\r\n}\r\n",
+												"variables": ""
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/graphql",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"graphql"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get all books with author names",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "graphql",
+											"graphql": {
+												"query": "query {\r\n    books {\r\n        items {\r\n            BookId\r\n            Title\r\n            Year\r\n            Pages\r\n            Authors {\r\n                items {\r\n                    AuthorId\r\n                    FirstName\r\n                    MiddleName\r\n                    LastName\r\n                }\r\n            }\r\n        }\r\n    }\r\n}\r\n",
+												"variables": ""
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/graphql",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"graphql"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get author by name with books sorted by year",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "graphql",
+											"graphql": {
+												"query": "query {\r\n    authors(\r\n        filter: {\r\n            and: [\r\n                { FirstName: { eq: \"Isaac\" } }\r\n                { LastName: { eq: \"Asimov\" } }\r\n            ]\r\n        }\r\n    ) {\r\n        items {\r\n            AuthorId\r\n            FirstName\r\n            MiddleName\r\n            LastName\r\n            Dob\r\n            Email\r\n            Bio\r\n            Books(orderBy: { Year: ASC} ) {\r\n                items {\r\n                    BookId\r\n                    Title\r\n                    Year\r\n                    Pages\r\n                }\r\n            }\r\n        }\r\n    }\r\n}\r\n",
+												"variables": ""
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/graphql",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"graphql"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Updating tables",
+					"item": [
+						{
+							"name": "REST",
+							"item": [
+								{
+									"name": "Create a book",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer ...",
+												"type": "default",
+												"disabled": true
+											},
+											{
+												"key": "X-MS-API-ROLE",
+												"value": "...",
+												"type": "default",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"Title\": \"Do Androids Dream of Electric Sheep?\",\r\n    \"Year\": 2018,\r\n    \"Pages\": 653\r\n}"
+										},
+										"url": {
+											"raw": "https://localhost:5001/api/Book",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Book"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update a book",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"Title\": \"Do Androids Dream of Electric Sheep?\",\r\n    \"Year\": 2019,\r\n    \"Pages\": 653\r\n}"
+										},
+										"url": {
+											"raw": "https://localhost:5001/api/Book/BookId/1021",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Book",
+												"BookId",
+												"1021"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update properties of a book",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"Year\": 2020\r\n}"
+										},
+										"url": {
+											"raw": "https://localhost:5001/api/Book/BookId/1021",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Book",
+												"BookId",
+												"1021"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete a book",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/Book/BookId/1021",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Book",
+												"BookId",
+												"1021"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "GraphQL",
+							"item": [
+								{
+									"name": "Create a book",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "graphql",
+											"graphql": {
+												"query": "mutation {\r\n    createBook(item: {\r\n        Title: \"Do Androids Dream of Electric Sheep?\"\r\n        Year: 2018\r\n        Pages: 653\r\n    }) {\r\n        BookId\r\n        Title\r\n        Year\r\n        Pages\r\n    }  \r\n}",
+												"variables": ""
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/graphql",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"graphql"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update a book",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "graphql",
+											"graphql": {
+												"query": "mutation {\r\n    updateBook(BookId: 1022, item: {\r\n        Year: 2019\r\n    }) {\r\n        BookId\r\n        Title\r\n        Year\r\n        Pages\r\n    }  \r\n}",
+												"variables": ""
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/graphql",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"graphql"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete a book",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "graphql",
+											"graphql": {
+												"query": "mutation {\r\n    deleteBook(BookId: 1022) {\r\n        BookId\r\n        Title\r\n        Year\r\n        Pages\r\n    }  \r\n}\r\n",
+												"variables": ""
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/graphql",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"graphql"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Querying views",
+					"item": [
+						{
+							"name": "REST",
+							"item": [
+								{
+									"name": "Get all book details",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/BookDetail",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"BookDetail"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get book detail by ID",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/BookDetail/BookId/1017",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"BookDetail",
+												"BookId",
+												"1017"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get all book details sorted by pages, title",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/BookDetail?$orderby=Pages, Title",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"BookDetail"
+											],
+											"query": [
+												{
+													"key": "$orderby",
+													"value": "Pages, Title"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "GraphQL",
+							"item": [
+								{
+									"name": "Get all book details",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "graphql",
+											"graphql": {
+												"query": "query {\r\n    bookDetails {\r\n        items {\r\n            BookId\r\n            Title\r\n            Year\r\n            Pages\r\n            Authors\r\n        }\r\n    }\r\n}\r\n",
+												"variables": ""
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/graphql",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"graphql"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get book detail by ID",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "graphql",
+											"graphql": {
+												"query": "query {\r\n    bookDetail_by_pk(BookId: 1017) {\r\n        BookId\r\n        Title\r\n        Year\r\n        Pages\r\n        Authors\r\n    }\r\n}\r\n",
+												"variables": ""
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/graphql",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"graphql"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get all book details sorted by pages, title",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "graphql",
+											"graphql": {
+												"query": "query {\r\n    bookDetails(orderBy: { Pages: ASC, Title: ASC }) {\r\n        items {\r\n            BookId\r\n            Title\r\n            Year\r\n            Pages\r\n            Authors\r\n        }\r\n    }\r\n}\r\n",
+												"variables": ""
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/graphql",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"graphql"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Calling stored procedures",
+					"item": [
+						{
+							"name": "REST",
+							"item": [
+								{
+									"name": "Cowritten by starts-with Robert",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/GetBooksCowrittenByAuthor?SearchType=S&Author=Robert",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"GetBooksCowrittenByAuthor"
+											],
+											"query": [
+												{
+													"key": "SearchType",
+													"value": "S"
+												},
+												{
+													"key": "Author",
+													"value": "Robert"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Cowritten by starts-with Asimov",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/GetBooksCowrittenByAuthor?SearchType=S&Author=Asimov",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"GetBooksCowrittenByAuthor"
+											],
+											"query": [
+												{
+													"key": "SearchType",
+													"value": "S"
+												},
+												{
+													"key": "Author",
+													"value": "Asimov"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Cowritten by contains Asimov",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/GetBooksCowrittenByAuthor?SearchType=C&Author=Asimov",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"GetBooksCowrittenByAuthor"
+											],
+											"query": [
+												{
+													"key": "SearchType",
+													"value": "C"
+												},
+												{
+													"key": "Author",
+													"value": "Asimov"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Cowritten by contains Hoffman",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/GetBooksCowrittenByAuthor?SearchType=C&Author=Hoffman",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"GetBooksCowrittenByAuthor"
+											],
+											"query": [
+												{
+													"key": "SearchType",
+													"value": "C"
+												},
+												{
+													"key": "Author",
+													"value": "Hoffman"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Cowritten by starts-with Robert",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"SearchType\": \"S\",\r\n  \"Author\": \"Robert\"\r\n}"
+										},
+										"url": {
+											"raw": "https://localhost:5001/api/GetBooksCowrittenByAuthor",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"GetBooksCowrittenByAuthor"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "GraphQL",
+							"item": [
+								{
+									"name": "Cowritten by starts-with Robert",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "graphql",
+											"graphql": {
+												"query": "query {\r\n    executeGetBooksCowrittenByAuthor(SearchType: \"S\", Author: \"Robert\") {\r\n        BookId\r\n        Title\r\n        Pages\r\n        Year\r\n        Authors\r\n    }\r\n}",
+												"variables": ""
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/graphql",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"graphql"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Cowritten by starts-with Asimov",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "graphql",
+											"graphql": {
+												"query": "query {\r\n    executeGetBooksCowrittenByAuthor(SearchType: \"S\", Author: \"Asimov\") {\r\n        BookId\r\n        Title\r\n        Pages\r\n        Year\r\n        Authors\r\n    }\r\n}",
+												"variables": ""
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/graphql",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"graphql"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Cowritten by contains Asimov",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "graphql",
+											"graphql": {
+												"query": "query {\r\n    executeGetBooksCowrittenByAuthor(SearchType: \"C\", Author: \"Asimov\") {\r\n        BookId\r\n        Title\r\n        Pages\r\n        Year\r\n        Authors\r\n    }\r\n}",
+												"variables": ""
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/graphql",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"graphql"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Cowritten by contains Hoffman",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "graphql",
+											"graphql": {
+												"query": "query {\r\n    executeGetBooksCowrittenByAuthor(SearchType: \"C\", Author: \"Hoffman\") {\r\n        BookId\r\n        Title\r\n        Pages\r\n        Year\r\n        Authors\r\n    }\r\n}",
+												"variables": ""
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/graphql",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"graphql"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Row-level security (RLS)",
+					"item": [
+						{
+							"name": "Get all branches",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer ...",
+										"type": "default",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://localhost:5001/api/Branch",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"Branch"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get SESSION_CONTEXT values",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer ...",
+										"type": "default",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://localhost:5001/api/GetSessionContextValues",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"GetSessionContextValues"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a branch",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer ...",
+										"type": "default",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"BranchName\": \"The new branch\",\r\n    \"ManagerName\": \"jane.librarian@dablibrary.onmicrosoft.com\"\r\n}"
+								},
+								"url": {
+									"raw": "https://localhost:5001/api/Branch",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"Branch"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Azure Cosmos DB",
+			"item": [
+				{
+					"name": "Querying containers",
+					"item": [
+						{
+							"name": "Get all books",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer ey...",
+										"type": "default",
+										"disabled": true
+									},
+									{
+										"key": "X-MS-API-ROLE",
+										"value": "...",
+										"type": "default",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query {\r\n    # DAB for Cosmos DB does not yet support item-level security via policy expressions\r\n    # and so type discrimination within a container requires a filter on each query\r\n    books(filter: { type: { eq: \"book\" } }) {\r\n        items {\r\n            id\r\n            title\r\n            year\r\n            pages\r\n        }\r\n    }\r\n}\r\n",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all authors",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query {\r\n    # DAB for Cosmos DB does not yet support item-level security via policy expressions\r\n    # and so type discrimination within a container requires a filter on each query\r\n    authors(filter: { type: { eq: \"author\" } }) {\r\n        items {\r\n            id\r\n            firstName\r\n            middleName\r\n            lastName\r\n            dob\r\n            email\r\n            bio\r\n        }\r\n    }\r\n}\r\n",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get book by ID",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query {\r\n    book_by_pk(id: \"B1002\", _partitionKeyValue: \"book\") {\r\n        id\r\n        title\r\n        year\r\n        pages\r\n    }\r\n}\r\n",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all books sorted by pages",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query {\r\n    books(filter: { type: { eq: \"book\" } }, orderBy: { pages: ASC }) {\r\n        items {\r\n            id\r\n            title\r\n            year\r\n            pages\r\n        }\r\n    }\r\n}\r\n",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all books with denormalized authors",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query {\r\n    books(filter: { type: { eq: \"book\" } }) {\r\n        items {\r\n            id\r\n            title\r\n            authors {\r\n                id\r\n                firstName\r\n                middleName\r\n                lastName\r\n            }\r\n        }\r\n    }\r\n}\r\n",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get book by title with denormalized authors",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query {\r\n    books(filter: {\r\n            and: [\r\n                { type: { eq: \"book\" } }\r\n                { title: { eq: \"Nightfall\" } }\r\n            ]\r\n        }) {\r\n        items {\r\n            id\r\n            title\r\n            year\r\n            pages\r\n            authors {\r\n                id\r\n                firstName\r\n                middleName\r\n                lastName\r\n            }\r\n        }\r\n    }\r\n}\r\n\r\n",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get author by name",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query {\r\n    authors(\r\n        filter: {\r\n            and: [\r\n                { type: { eq: \"author\" } }\r\n                { firstName: { eq: \"Isaac\" } }\r\n                { lastName: { eq: \"Asimov\" } }\r\n            ]\r\n        }\r\n    ) {\r\n        items {\r\n            id\r\n            firstName\r\n            middleName\r\n            lastName\r\n            dob\r\n            email\r\n            bio\r\n        }\r\n    }\r\n}\r\n",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get first 3 book titles sorted by title",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query {\r\n    books(filter: { type: { eq: \"book\" } }, first: 3, orderBy: { title: ASC }) {\r\n        items {\r\n            title\r\n        }\r\n    }\r\n}\r\n",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get books with pagination",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query {\r\n    books(filter: { type: { eq: \"book\" } }, first: 10, after: null) {\r\n        items {\r\n            id\r\n            title\r\n        }\r\n        hasNextPage\r\n        endCursor\r\n    }\r\n}\r\n",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Updating containers",
+					"item": [
+						{
+							"name": "Create an author",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    createAuthor(item: {\r\n        id: \"A1010\"\r\n        type: \"author\"\r\n        firstName: \"Leonard\"\r\n        middleName: \"George\"\r\n        lastName: \"Lobel\"\r\n        dob: \"1964-08-30\"\r\n        email: \"llobel@hotmail.com\"\r\n        bio: \"Mauris ipsum non est odio ornare et luctus ut pretiumlaoreet tincidunt sed tincidunt eros ac tincidunt egestas nulla massa porta dolor sit amet egestas dolor elit sed justo phasellus sed aliquam nunc integer\"\r\n    }) {\r\n        id\r\n        firstName\r\n        middleName\r\n        lastName\r\n    }  \r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a book",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer ey...",
+										"type": "default",
+										"disabled": true
+									},
+									{
+										"key": "X-MS-API-ROLE",
+										"value": "...",
+										"type": "default",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    createBook(item: {\r\n        id: \"B1021\"\r\n        type: \"book\"\r\n        title: \"Programming Microsoft SQL Server 2022\"\r\n        year: 2022\r\n        pages: 894\r\n        authors: [\r\n            {\r\n                id: \"A1010\"\r\n                firstName: \"Leonard\"\r\n                middleName: \"George\"\r\n                lastName: \"Lobel\"\r\n            }\r\n        ]\r\n    }) {\r\n        id\r\n        title\r\n        authors {\r\n            lastName\r\n        }\r\n    }  \r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update a book",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    updateBook(id: \"B1021\", _partitionKeyValue: \"book\", item: {\r\n        id: \"B1021\"\r\n        type: \"book\"\r\n        title: \"Programming Microsoft SQL Server 2022\"\r\n        year: 2022\r\n        pages: 894\r\n        authors: [\r\n            {\r\n                id: \"A1010\"\r\n                firstName: \"Leonard\"\r\n                middleName: \"George\"\r\n                lastName: \"Lobel\"\r\n            }\r\n            {\r\n                id: \"A1005\"\r\n                firstName: \"Bob\"\r\n                lastName: \"Ward\"\r\n            }\r\n       ]\r\n    }) {\r\n        id\r\n        title\r\n        authors {\r\n            lastName\r\n        }\r\n    }  \r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete a book",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    deleteBook(id: \"B1021\", _partitionKeyValue: \"book\") {\r\n        id\r\n    }  \r\n}\r\n",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete an author",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "# Actually, deleteAuthor and deleteBook are the same, it's the _partitionKeyValue that matters\r\nmutation {\r\n    deleteAuthor(id: \"A1010\", _partitionKeyValue: \"author\") {\r\n        id\r\n    }  \r\n}\r\n",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

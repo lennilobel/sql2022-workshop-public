@@ -1,0 +1,353 @@
+[
+	{
+		"id": "B1000",
+		"type": "book",
+		"title": "Prelude to Foundation",
+		"year": 1988,
+		"pages": 403,
+		"authors": [
+			{
+				"id": "A1000",
+				"firstName": "Isaac",
+				"middleName": null,
+				"lastName": "Asimov"
+			}
+		]
+	},
+	{
+		"id": "B1001",
+		"type": "book",
+		"title": "Forward the Foundation",
+		"year": 1993,
+		"pages": 417,
+		"authors": [
+			{
+				"id": "A1000",
+				"firstName": "Isaac",
+				"middleName": null,
+				"lastName": "Asimov"
+			}
+		]
+	},
+	{
+		"id": "B1002",
+		"type": "book",
+		"title": "Foundation",
+		"year": 1951,
+		"pages": 255,
+		"authors": [
+			{
+				"id": "A1000",
+				"firstName": "Isaac",
+				"middleName": null,
+				"lastName": "Asimov"
+			}
+		]
+	},
+	{
+		"id": "B1003",
+		"type": "book",
+		"title": "Foundation and Empire",
+		"year": 1952,
+		"pages": 247,
+		"authors": [
+			{
+				"id": "A1000",
+				"firstName": "Isaac",
+				"middleName": null,
+				"lastName": "Asimov"
+			}
+		]
+	},
+	{
+		"id": "B1004",
+		"type": "book",
+		"title": "Second Foundation",
+		"year": 1953,
+		"pages": 210,
+		"authors": [
+			{
+				"id": "A1000",
+				"firstName": "Isaac",
+				"middleName": null,
+				"lastName": "Asimov"
+			}
+		]
+	},
+	{
+		"id": "B1005",
+		"type": "book",
+		"title": "Foundation's Edge",
+		"year": 1982,
+		"pages": 367,
+		"authors": [
+			{
+				"id": "A1000",
+				"firstName": "Isaac",
+				"middleName": null,
+				"lastName": "Asimov"
+			}
+		]
+	},
+	{
+		"id": "B1006",
+		"type": "book",
+		"title": "Foundation and Earth",
+		"year": 1986,
+		"pages": 356,
+		"authors": [
+			{
+				"id": "A1000",
+				"firstName": "Isaac",
+				"middleName": null,
+				"lastName": "Asimov"
+			}
+		]
+	},
+	{
+		"id": "B1007",
+		"type": "book",
+		"title": "Nemesis",
+		"year": 1989,
+		"pages": 386,
+		"authors": [
+			{
+				"id": "A1000",
+				"firstName": "Isaac",
+				"middleName": null,
+				"lastName": "Asimov"
+			}
+		]
+	},
+	{
+		"id": "B1008",
+		"type": "book",
+		"title": "Starship Troopers",
+		"year": null,
+		"pages": null,
+		"authors": [
+			{
+				"id": "A1001",
+				"firstName": "Robert",
+				"middleName": "A.",
+				"lastName": "Heinlein"
+			}
+		]
+	},
+	{
+		"id": "B1009",
+		"type": "book",
+		"title": "Stranger in a Strange Land",
+		"year": null,
+		"pages": null,
+		"authors": [
+			{
+				"id": "A1001",
+				"firstName": "Robert",
+				"middleName": "A.",
+				"lastName": "Heinlein"
+			}
+		]
+	},
+	{
+		"id": "B1010",
+		"type": "book",
+		"title": "Nightfall",
+		"year": null,
+		"pages": null,
+		"authors": [
+			{
+				"id": "A1000",
+				"firstName": "Isaac",
+				"middleName": null,
+				"lastName": "Asimov"
+			},
+			{
+				"id": "A1002",
+				"firstName": "Robert",
+				"middleName": null,
+				"lastName": "Silvenberg"
+			}
+		]
+	},
+	{
+		"id": "B1011",
+		"type": "book",
+		"title": "Nightwings",
+		"year": null,
+		"pages": null,
+		"authors": [
+			{
+				"id": "A1001",
+				"firstName": "Robert",
+				"middleName": "A.",
+				"lastName": "Heinlein"
+			}
+		]
+	},
+	{
+		"id": "B1012",
+		"type": "book",
+		"title": "Across a Billion Years",
+		"year": null,
+		"pages": null,
+		"authors": [
+			{
+				"id": "A1002",
+				"firstName": "Robert",
+				"middleName": null,
+				"lastName": "Silvenberg"
+			}
+		]
+	},
+	{
+		"id": "B1013",
+		"type": "book",
+		"title": "Hyperion",
+		"year": 1989,
+		"pages": 482,
+		"authors": [
+			{
+				"id": "A1003",
+				"firstName": "Dan",
+				"middleName": null,
+				"lastName": "Simmons"
+			}
+		]
+	},
+	{
+		"id": "B1014",
+		"type": "book",
+		"title": "The Fall of Hyperion",
+		"year": 1990,
+		"pages": 517,
+		"authors": [
+			{
+				"id": "A1003",
+				"firstName": "Dan",
+				"middleName": null,
+				"lastName": "Simmons"
+			}
+		]
+	},
+	{
+		"id": "B1015",
+		"type": "book",
+		"title": "Endymion",
+		"year": 1996,
+		"pages": 441,
+		"authors": [
+			{
+				"id": "A1003",
+				"firstName": "Dan",
+				"middleName": null,
+				"lastName": "Simmons"
+			}
+		]
+	},
+	{
+		"id": "B1016",
+		"type": "book",
+		"title": "The Rise of Endymion",
+		"year": 1997,
+		"pages": 579,
+		"authors": [
+			{
+				"id": "A1003",
+				"firstName": "Dan",
+				"middleName": null,
+				"lastName": "Simmons"
+			}
+		]
+	},
+	{
+		"id": "B1017",
+		"type": "book",
+		"title": "Practical Azure SQL Database for Modern Developers",
+		"year": 2020,
+		"pages": 326,
+		"authors": [
+			{
+				"id": "A1002",
+				"firstName": "Robert",
+				"middleName": null,
+				"lastName": "Silvenberg"
+			},
+			{
+				"id": "A1004",
+				"firstName": "Davide",
+				"middleName": null,
+				"lastName": "Mauri"
+			},
+			{
+				"id": "A1006",
+				"firstName": "Anna",
+				"middleName": null,
+				"lastName": "Hoffman"
+			},
+			{
+				"id": "A1007",
+				"firstName": "Silvano",
+				"middleName": null,
+				"lastName": "Coriani"
+			},
+			{
+				"id": "A1008",
+				"firstName": "Sanjay",
+				"middleName": null,
+				"lastName": "Mishra"
+			},
+			{
+				"id": "A1009",
+				"firstName": "Jovan",
+				"middleName": null,
+				"lastName": "Popovic"
+			}
+		]
+	},
+	{
+		"id": "B1018",
+		"type": "book",
+		"title": "SQL Server 2019 Revealed: Including Big Data Clusters and Machine Learning",
+		"year": 2019,
+		"pages": 444,
+		"authors": [
+			{
+				"id": "A1005",
+				"firstName": "Bob",
+				"middleName": null,
+				"lastName": "Ward"
+			}
+		]
+	},
+	{
+		"id": "B1019",
+		"type": "book",
+		"title": "Azure SQL Revealed: A Guide to the Cloud for SQL Server Professionals",
+		"year": 2020,
+		"pages": 528,
+		"authors": [
+			{
+				"id": "A1005",
+				"firstName": "Bob",
+				"middleName": null,
+				"lastName": "Ward"
+			}
+		]
+	},
+	{
+		"id": "B1020",
+		"type": "book",
+		"title": "SQL Server 2022 Revealed: A Hybrid Data Platform Powered by Security, Performance, and Availability",
+		"year": 2022,
+		"pages": 506,
+		"authors": [
+			{
+				"id": "A1005",
+				"firstName": "Bob",
+				"middleName": null,
+				"lastName": "Ward"
+			}
+		]
+	}
+]

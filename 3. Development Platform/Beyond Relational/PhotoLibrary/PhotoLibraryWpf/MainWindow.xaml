@@ -1,0 +1,13 @@
+﻿<Window x:Class="PhotoLibraryWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WPF FILESTREAM Demo" Height="350" Width="525">
+	<StackPanel Margin="4">
+		<StackPanel Margin="4" Orientation="Horizontal">
+			<TextBlock Margin="4" FontSize="16" VerticalAlignment="Center">Photo ID</TextBlock>
+			<TextBox Margin="4" FontSize="15" Width="40" Name="PhotoIdTextBox" />
+			<Button Margin="4" Padding="4" Click="DownloadButton_Click">Download Photo</Button>
+		</StackPanel>
+		<MediaElement Name="mediaElement1" />
+	</StackPanel>
+</Window>
