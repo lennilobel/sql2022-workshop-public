@@ -170,3 +170,4 @@ INSERT INTO BookAuthor VALUES
 
 SELECT * FROM Book
 SELECT * FROM Author
+SELECT * FROM BookAuthor
