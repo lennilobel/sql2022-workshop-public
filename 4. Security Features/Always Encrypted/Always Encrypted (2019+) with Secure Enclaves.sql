@@ -109,6 +109,7 @@ SELECT * FROM Employee
 GO
 
 -- re-enable AE in the connection string
+-- and MAKE SURE that parameterization is enabled in advanced query options
 USE MyEncryptedDB
 GO
 

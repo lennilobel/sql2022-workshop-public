@@ -78,7 +78,7 @@ exit
 
 docker ps -a				(three containers)
 
-docker rm ## ##				(remove first and third container, ??? see the storage disappear from file system)
+docker rm ## ##				(remove first and third container, isolated storage is removed from file system)
 
 docker ps -a				(just one running container)
 
@@ -157,7 +157,7 @@ docker logs ##				(need the EULA)
 
 - https://hub.docker.com/_/microsoft-mssql-server
 
-docker run -d -v c:\temp:/tempvol -p 1401:1433 -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Big$ecret123" mcr.microsoft.com/mssql/server:2017-latest
+docker run -d -v c:\temp:/tempvol -p 1401:1433 -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Big$ecret123" mcr.microsoft.com/mssql/server:2017-latest
 
 docker logs ##				(keep hitting... shows all good)
 
@@ -167,7 +167,7 @@ docker logs ##				(keep hitting... shows all good)
 - Attach
    navigating the container file system of course
 
-- Copy AW db files (.mdf, .ldf, and .bak)
+- Copy AW db files (.mdf, .ldf, and .bak) from C:\DB
 
 - Attach AdventureWorks2019.mdf from "/tempvol"
    Fails, because this database works only on 2019+
@@ -178,7 +178,7 @@ docker logs ##				(keep hitting... shows all good)
 
 /* SQL Server 2019 */
 
-docker run -d -v c:\temp:/tempvol -p 1402:1433 -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Big$ecret123" mcr.microsoft.com/mssql/server:2019-latest
+docker run -d -v c:\temp:/tempvol -p 1402:1433 -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Big$ecret123" mcr.microsoft.com/mssql/server:2019-latest
 
 - SSMS, connect to "localhost,1402"
    no databases of course
@@ -189,7 +189,7 @@ docker run -d -v c:\temp:/tempvol -p 1402:1433 -e "ACCEPT_EULA=Y" -e "SA_PASSWOR
 
 /* SQL Server 2022 */
 
-docker run -d -v c:\temp:/tempvol -p 1403:1433 -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Big$ecret123" mcr.microsoft.com/mssql/server:2022-latest
+docker run -d -v c:\temp:/tempvol -p 1403:1433 -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Big$ecret123" mcr.microsoft.com/mssql/server:2022-latest
 
 docker ps		(all three are running)
 
@@ -204,8 +204,8 @@ docker ps		(all three are running)
 docker build -t sql2019-pb-fts .
 docker build -t sql2022-pb-fts .
 
-docker run -d -v c:\temp:/tempvol -p 1402:1433 -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Big$ecret123" sql2019-pb-fts
-docker run -d -v c:\temp:/tempvol -p 1403:1433 -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Big$ecret123" sql2022-pb-fts
+docker run -d -v c:\temp:/tempvol -p 1402:1433 -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Big$ecret123" sql2019-pb-fts
+docker run -d -v c:\temp:/tempvol -p 1403:1433 -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Big$ecret123" sql2022-pb-fts
 
 /* Edit WSL configuration to limit memory consumption for the vmmem process */
 

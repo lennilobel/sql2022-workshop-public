@@ -49,6 +49,9 @@ FROM
 	GENERATE_SERIES(0, @DayCount)
 
 -- Build a contiguous series of date/time values to report on intervals, where not all intervals are populated
+CREATE DATABASE MyDB
+GO
+
 USE MyDB
 GO
 
@@ -123,7 +126,7 @@ SalesByHourCte AS (
 		OrderHour
 ),
 HoursSeriesCte(OrderHour) AS (
-	-- Generate contiguous hour series
+	-- Generate contiguous hour series using a recursive CTE
     SELECT @Start
     UNION ALL
     SELECT DATEADD(HOUR, 1, OrderHour) FROM HoursSeriesCte WHERE OrderHour < @End

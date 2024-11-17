@@ -108,7 +108,7 @@ SELECT
   HighestOn = LAST_VALUE(OrderDate)  OVER win
  FROM [Order]
  WINDOW win AS (PARTITION BY ProductID ORDER BY Quantity ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)
- ORDER BY OrderDate		-- switch to ProductID to sort results the same as the internal window order
+ ORDER BY OrderDate		-- switch to ProductID, Quantity to sort results the same as the internal window order
 
 -- But it's a problem if you have NULLs:
 DELETE FROM [Order]
@@ -130,7 +130,7 @@ SELECT
   HighestOn = LAST_VALUE(OrderDate)  OVER win
  FROM [Order]
  WINDOW win AS (PARTITION BY ProductID ORDER BY Quantity ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)
- ORDER BY OrderDate		-- switch to ProductID to sort results the same as the internal window order
+ ORDER BY OrderDate		-- switch to ProductID, Quantity to sort results the same as the internal window order
 
 -- With IGNORE NULLS, we get meaningful (non-NULL) order dates for each product
 SELECT
@@ -141,7 +141,7 @@ SELECT
   HighestOn = LAST_VALUE(OrderDate)  IGNORE NULLS OVER win
  FROM [Order]
  WINDOW win AS (PARTITION BY ProductID ORDER BY Quantity ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)
- ORDER BY ProductID --OrderDate		-- switch to ProductID to sort results the same as the internal window order
+ ORDER BY OrderDate		-- switch to ProductID, Quantity to sort results the same as the internal window order
 
 GO
 

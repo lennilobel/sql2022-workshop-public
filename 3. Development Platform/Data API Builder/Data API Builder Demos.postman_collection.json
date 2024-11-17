@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "81f327dd-e3cb-43f1-a798-07d00b21d329",
+		"_postman_id": "bc87111a-9d0f-4a83-8b42-0808c9391bed",
 		"name": "Data API Builder Demos",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30168109"
 	},
 	"item": [
 		{
@@ -33,12 +34,12 @@
 											}
 										],
 										"url": {
-											"raw": "https://localhost:5001/api/Book",
-											"protocol": "https",
+											"raw": "http://localhost:5000/api/Book",
+											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "5001",
+											"port": "5000",
 											"path": [
 												"api",
 												"Book"
@@ -53,12 +54,12 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://localhost:5001/api/Author",
-											"protocol": "https",
+											"raw": "http://localhost:5000/api/Author",
+											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "5001",
+											"port": "5000",
 											"path": [
 												"api",
 												"Author"
@@ -73,12 +74,12 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://localhost:5001/api/Book/BookId/1017",
-											"protocol": "https",
+											"raw": "http://localhost:5000/api/Book/BookId/1017",
+											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "5001",
+											"port": "5000",
 											"path": [
 												"api",
 												"Book",
@@ -95,12 +96,12 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://localhost:5001/api/Book?$orderby=Pages asc, Title asc",
-											"protocol": "https",
+											"raw": "http://localhost:5000/api/Book?$orderby=Pages asc, Title asc",
+											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "5001",
+											"port": "5000",
 											"path": [
 												"api",
 												"Book"
@@ -109,36 +110,6 @@
 												{
 													"key": "$orderby",
 													"value": "Pages asc, Title asc"
-												}
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Get all book titles sorted by pages, title",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "https://localhost:5001/api/Book?$orderby=Pages asc, Title asc&$select=Title",
-											"protocol": "https",
-											"host": [
-												"localhost"
-											],
-											"port": "5001",
-											"path": [
-												"api",
-												"Book"
-											],
-											"query": [
-												{
-													"key": "$orderby",
-													"value": "Pages asc, Title asc"
-												},
-												{
-													"key": "$select",
-													"value": "Title"
 												}
 											]
 										}
@@ -151,12 +122,12 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://localhost:5001/api/Book?$orderby=Title asc&$select=Title",
-											"protocol": "https",
+											"raw": "http://localhost:5000/api/Book?$orderby=Title asc&$select=Title",
+											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "5001",
+											"port": "5000",
 											"path": [
 												"api",
 												"Book"
@@ -176,12 +147,12 @@
 									"response": []
 								},
 								{
-									"name": "Get book titles filtered and sorted by pages",
+									"name": "Get books filtered and sorted by pages",
 									"request": {
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "http://localhost:5000/api/Book?$filter=Pages gt 500&$orderby=Pages&$select=Title",
+											"raw": "http://localhost:5000/api/Book?$filter=Pages gt 500&$orderby=Pages",
 											"protocol": "http",
 											"host": [
 												"localhost"
@@ -199,10 +170,6 @@
 												{
 													"key": "$orderby",
 													"value": "Pages"
-												},
-												{
-													"key": "$select",
-													"value": "Title"
 												}
 											]
 										}
@@ -210,7 +177,7 @@
 									"response": []
 								},
 								{
-									"name": "Get book titles filtered by complex expression",
+									"name": "Get books filtered by complex expression",
 									"request": {
 										"method": "GET",
 										"header": [],
@@ -507,12 +474,12 @@
 											"raw": "{\r\n    \"Title\": \"Do Androids Dream of Electric Sheep?\",\r\n    \"Year\": 2018,\r\n    \"Pages\": 653\r\n}"
 										},
 										"url": {
-											"raw": "https://localhost:5001/api/Book",
-											"protocol": "https",
+											"raw": "http://localhost:5000/api/Book",
+											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "5001",
+											"port": "5000",
 											"path": [
 												"api",
 												"Book"
@@ -531,12 +498,12 @@
 											"raw": "{\r\n    \"Title\": \"Do Androids Dream of Electric Sheep?\",\r\n    \"Year\": 2019,\r\n    \"Pages\": 653\r\n}"
 										},
 										"url": {
-											"raw": "https://localhost:5001/api/Book/BookId/1021",
-											"protocol": "https",
+											"raw": "http://localhost:5000/api/Book/BookId/1021",
+											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "5001",
+											"port": "5000",
 											"path": [
 												"api",
 												"Book",
@@ -557,12 +524,12 @@
 											"raw": "{\r\n    \"Year\": 2020\r\n}"
 										},
 										"url": {
-											"raw": "https://localhost:5001/api/Book/BookId/1021",
-											"protocol": "https",
+											"raw": "http://localhost:5000/api/Book/BookId/1021",
+											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "5001",
+											"port": "5000",
 											"path": [
 												"api",
 												"Book",
@@ -579,12 +546,12 @@
 										"method": "DELETE",
 										"header": [],
 										"url": {
-											"raw": "https://localhost:5001/api/Book/BookId/1021",
-											"protocol": "https",
+											"raw": "http://localhost:5000/api/Book/BookId/1021",
+											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "5001",
+											"port": "5000",
 											"path": [
 												"api",
 												"Book",
@@ -694,12 +661,12 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://localhost:5001/api/BookDetail",
-											"protocol": "https",
+											"raw": "http://localhost:5000/api/BookDetail",
+											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "5001",
+											"port": "5000",
 											"path": [
 												"api",
 												"BookDetail"
@@ -714,12 +681,12 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://localhost:5001/api/BookDetail/BookId/1017",
-											"protocol": "https",
+											"raw": "http://localhost:5000/api/BookDetail/BookId/1017",
+											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "5001",
+											"port": "5000",
 											"path": [
 												"api",
 												"BookDetail",
@@ -736,12 +703,12 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://localhost:5001/api/BookDetail?$orderby=Pages, Title",
-											"protocol": "https",
+											"raw": "http://localhost:5000/api/BookDetail?$orderby=Pages, Title",
+											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "5001",
+											"port": "5000",
 											"path": [
 												"api",
 												"BookDetail"
@@ -855,12 +822,12 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://localhost:5001/api/GetBooksCowrittenByAuthor?SearchType=S&Author=Robert",
-											"protocol": "https",
+											"raw": "http://localhost:5000/api/GetBooksCowrittenByAuthor?SearchType=S&Author=Robert",
+											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "5001",
+											"port": "5000",
 											"path": [
 												"api",
 												"GetBooksCowrittenByAuthor"
@@ -885,12 +852,12 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://localhost:5001/api/GetBooksCowrittenByAuthor?SearchType=S&Author=Asimov",
-											"protocol": "https",
+											"raw": "http://localhost:5000/api/GetBooksCowrittenByAuthor?SearchType=S&Author=Asimov",
+											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "5001",
+											"port": "5000",
 											"path": [
 												"api",
 												"GetBooksCowrittenByAuthor"
@@ -915,12 +882,12 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://localhost:5001/api/GetBooksCowrittenByAuthor?SearchType=C&Author=Asimov",
-											"protocol": "https",
+											"raw": "http://localhost:5000/api/GetBooksCowrittenByAuthor?SearchType=C&Author=Asimov",
+											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "5001",
+											"port": "5000",
 											"path": [
 												"api",
 												"GetBooksCowrittenByAuthor"
@@ -945,12 +912,12 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://localhost:5001/api/GetBooksCowrittenByAuthor?SearchType=C&Author=Hoffman",
-											"protocol": "https",
+											"raw": "http://localhost:5000/api/GetBooksCowrittenByAuthor?SearchType=C&Author=Hoffman",
+											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "5001",
+											"port": "5000",
 											"path": [
 												"api",
 												"GetBooksCowrittenByAuthor"
@@ -979,12 +946,12 @@
 											"raw": "{\r\n  \"SearchType\": \"S\",\r\n  \"Author\": \"Robert\"\r\n}"
 										},
 										"url": {
-											"raw": "https://localhost:5001/api/GetBooksCowrittenByAuthor",
-											"protocol": "https",
+											"raw": "http://localhost:5000/api/GetBooksCowrittenByAuthor",
+											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "5001",
+											"port": "5000",
 											"path": [
 												"api",
 												"GetBooksCowrittenByAuthor"
@@ -1122,12 +1089,12 @@
 									}
 								],
 								"url": {
-									"raw": "https://localhost:5001/api/Branch",
-									"protocol": "https",
+									"raw": "http://localhost:5000/api/Branch",
+									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "5001",
+									"port": "5000",
 									"path": [
 										"api",
 										"Branch"
@@ -1149,12 +1116,12 @@
 									}
 								],
 								"url": {
-									"raw": "https://localhost:5001/api/GetSessionContextValues",
-									"protocol": "https",
+									"raw": "http://localhost:5000/api/GetSessionContextValues",
+									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "5001",
+									"port": "5000",
 									"path": [
 										"api",
 										"GetSessionContextValues"
@@ -1180,12 +1147,12 @@
 									"raw": "{\r\n    \"BranchName\": \"The new branch\",\r\n    \"ManagerName\": \"jane.librarian@dablibrary.onmicrosoft.com\"\r\n}"
 								},
 								"url": {
-									"raw": "https://localhost:5001/api/Branch",
-									"protocol": "https",
+									"raw": "http://localhost:5000/api/Branch",
+									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "5001",
+									"port": "5000",
 									"path": [
 										"api",
 										"Branch"

@@ -2,6 +2,9 @@
 
 -- https://learn.microsoft.com/en-us/sql/t-sql/queries/is-distinct-from-transact-sql?view=sql-server-ver16
 
+CREATE DATABASE MyDB
+GO
+
 USE MyDB
 GO
 
@@ -13,8 +16,6 @@ CREATE TABLE Sample (
 	Value int,
 	Message nvarchar(50)
 )
-
-CREATE NONCLUSTERED INDEX IDX_Sample_Value ON Sample (Value)
 
 INSERT INTO Sample VALUES 
  (NULL, 'hello'),
@@ -50,16 +51,18 @@ SELECT * FROM Sample WHERE Value = NULL						-- Never works
 USE WideWorldImporters
 GO
 
-DROP INDEX IF EXISTS Sales.Orders.IDX_Orders_PickingCompletedWhen;
+DROP INDEX IF EXISTS Sales.Orders.IDX_Orders_PickingCompletedWhen
 GO
 
-CREATE NONCLUSTERED INDEX IDX_Orders_PickingCompletedWhen ON Sales.Orders (PickingCompletedWhen);
+CREATE NONCLUSTERED INDEX IDX_Orders_PickingCompletedWhen ON Sales.Orders (PickingCompletedWhen)
 GO
-
 
 
 -- This is a demo for the enhanced IS [NOT] DISTINCT FROM T-SQL function in SQL Server 2022
 -- Enable Include Actual Execution Plan for each query
+
+-- The orders table has 3085 rows with NULL values in the PickingCompletedWhen column
+SELECT * FROM Sales.Orders
 
 -- Find all the orders for a specific picking completion date (should yield 35 rows using an index seek)
 DECLARE @dt datetime2 = '2013-01-01 12:00:00.0000000'

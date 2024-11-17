@@ -1,7 +1,15 @@
 /* =================== Python in SQL Server =================== */
 
+-- https://learn.microsoft.com/en-us/sql/machine-learning/install/sql-machine-learning-services-windows-install-sql-2022?view=sql-server-ver16
+-- https://docs.microsoft.com/en-us/sql/advanced-analytics/tutorials/sqldev-py3-explore-and-visualize-the-data?view=sql-server-ver15
+
 EXEC sp_configure 'external scripts enabled', 1
 RECONFIGURE
+GO
+
+EXEC sp_execute_external_script
+	@script = N'import sys;print("Hello from Python " + sys.version)',
+	@language=N'Python'
 GO
 
 -- Do some calculations, and write the result to STDOUT
@@ -58,8 +66,8 @@ GO
 
 -- Override the default InputDataSet and OutputDataSet data frame names
 DECLARE @script nvarchar(max) = N'
-MonthlySales = SqlData
-MonthlySales["JulyMonthlyAverage"] = round(SqlData["SalesYTD"] / 7, 2)
+MonthlySales = SalesPersonData
+MonthlySales["JulyMonthlyAverage"] = round(SalesPersonData["SalesYTD"] / 7, 2)
 '
 DECLARE @input nvarchar(max) = N'
 	SELECT FirstName, LastName, CONVERT(float, SalesYTD) AS SalesYTD
@@ -69,14 +77,14 @@ DECLARE @input nvarchar(max) = N'
 '
 EXEC sp_execute_external_script @language = N'Python', @script = @script,
     @input_data_1 = @input,
-	@input_data_1_name = N'SqlData',
+	@input_data_1_name = N'SalesPersonData',
 	@output_data_1_name = N'MonthlySales'
 GO
 
 -- Use WITH RESULT SETS to define column names and data types to the output data frame
 DECLARE @script nvarchar(max) = N'
-MonthlySales = SqlData
-MonthlySales["JulyMonthlyAverage"] = round(SqlData["SalesYTD"] / 7, 2)
+MonthlySales = SalesPersonData
+MonthlySales["JulyMonthlyAverage"] = round(SalesPersonData["SalesYTD"] / 7, 2)
 '
 DECLARE @input nvarchar(max) = N'
 	SELECT FirstName, LastName, CONVERT(float, SalesYTD) AS SalesYTD
@@ -86,7 +94,7 @@ DECLARE @input nvarchar(max) = N'
 '
 EXEC sp_execute_external_script @language = N'Python', @script = @script,
     @input_data_1 = @input,
-	@input_data_1_name = N'SqlData',
+	@input_data_1_name = N'SalesPersonData',
 	@output_data_1_name = N'MonthlySales'
 	WITH RESULT SETS(
 		(FirstName varchar(max), LastName varchar(max), SalesYTD money, JulyMonthlyAverage money)
@@ -95,8 +103,8 @@ GO
 
 -- Supply input parameters to the Python code and/or source query
 DECLARE @script nvarchar(max) = N'
-MonthlySales = SqlData
-MonthlySales["MonthlyAverage"] = round(SqlData["SalesYTD"] / MonthNumber, 2)
+MonthlySales = SalesPersonData
+MonthlySales["MonthlyAverage"] = round(SalesPersonData["SalesYTD"] / MonthNumber, 2)
 '
 DECLARE @input nvarchar(max) = N'
 	SELECT FirstName, LastName, CONVERT(float, SalesYTD) AS SalesYTD
@@ -106,7 +114,7 @@ DECLARE @input nvarchar(max) = N'
 '
 EXEC sp_execute_external_script @language = N'Python', @script = @script,
     @input_data_1 = @input,
-	@input_data_1_name = N'SqlData',
+	@input_data_1_name = N'SalesPersonData',
 	@output_data_1_name = N'MonthlySales',
 	@params = N'@MinSales float, @MonthNumber tinyint',
 	@MinSales = 2000000,
@@ -123,8 +131,8 @@ CREATE OR ALTER PROCEDURE GetMonthlyAverages (
 ) AS
 BEGIN
 	DECLARE @script nvarchar(max) = N'
-MonthlySales = SqlData
-MonthlySales["MonthlyAverage"] = round(SqlData["SalesYTD"] / MonthNumber, 2)
+MonthlySales = SalesPersonData
+MonthlySales["MonthlyAverage"] = round(SalesPersonData["SalesYTD"] / MonthNumber, 2)
 	'
 	DECLARE @input nvarchar(max) = N'
 		SELECT FirstName, LastName, CONVERT(float, SalesYTD) AS SalesYTD
@@ -134,7 +142,7 @@ MonthlySales["MonthlyAverage"] = round(SqlData["SalesYTD"] / MonthNumber, 2)
 	'
 	EXEC sp_execute_external_script @language = N'Python', @script = @script,
 		@input_data_1 = @input,
-		@input_data_1_name = N'SqlData',
+		@input_data_1_name = N'SalesPersonData',
 		@output_data_1_name = N'MonthlySales',
 		@params = N'@MinSales float, @MonthNumber tinyint',
 		@MinSales = @MinSales,
@@ -275,7 +283,3 @@ DROP TABLE IF EXISTS Sales
 GO
 EXEC sp_configure 'external scripts enabled', 0
 RECONFIGURE
-
-
-
--- https://docs.microsoft.com/en-us/sql/advanced-analytics/tutorials/sqldev-py3-explore-and-visualize-the-data?view=sql-server-ver15

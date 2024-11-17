@@ -128,6 +128,9 @@ SELECT
 
 -- Bit manipulation on table data
 
+CREATE DATABASE MyDB
+GO
+
 USE MyDB
 GO
 

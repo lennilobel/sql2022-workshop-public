@@ -26,22 +26,19 @@ dab add Author --source dbo.Author --permissions "anonymous:*"
 
 dab start
 
-: https://localhost:5001/api/Book
+: http://localhost:5000/api/Book
 
-: https://localhost:5001/graphql
-:	Opens "Banana Cake Pop"
-:		A "GraphQL IDE"
-:	Click "Browse schema", and "Apply"
-:		Opens new tab on "Schema Reference" section
-:	On "Query" under Types
-:		See Query operations for Book and Author
-:		Notice pagination, filter, and orderBy controls
-:	Click "Mutation" under Types
+: http://localhost:5000/graphql
+:	Opens Nitro (a GraphQL IDE)
+:	Click "Browse schema"
+:	View "Query" types
+:		See Query operations for Book and Author, with pagination, filter, and orderBy controls
+:	View "Mutation" types
 :		See CUD operations for Book and Author
 
 : Switch to Postman
 :	For REST, can do POST, PUT, PATCH, DELETE (just just GET), and view formatted JSON
-:	For GraphQL, can run queries and mutations same as Banana Cake Pop
+:	For GraphQL, can run queries and mutations same as Nitro
 :
 : Run "Querying tables" Postman demos
 :	REST
@@ -182,19 +179,19 @@ dab start
 :	Open Azure Active Directory page
 :	Click App registrations on sidebar
 :		Click Data API Builder Demo
-:		Click App roles on sidebar
+:		Click Manage > App roles on sidebar
 :		Note two roles
 :			Book Readers (Book.Reader)
 :			Book Librarians (Book.Librarian)
 :		Click browser back
-:		Click Expose an API on sidebar
+:		Click Manage > Expose an API on sidebar
 :			Click the scope
 :			Note full scope name (we will request a token for this scope)
 :				api://ebe1e801-3ce2-4c70-ba3b-b6d3008532e0/Endpoint.Access
 :		Click browser back 2x
 :	Click Enterprise applications on sidebar
 :		Click Data API Builder Demo
-:		Click Users and groups on sidebar
+:		Click Manage > Users and groups on sidebar
 :		Note two users with different roles
 :			Jim Librarian
 :			Joe Reader

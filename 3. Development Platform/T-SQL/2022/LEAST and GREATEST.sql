@@ -42,6 +42,9 @@ SELECT
 						END
 GO
 
+CREATE DATABASE MyDB
+GO
+
 USE MyDB
 GO
 
@@ -151,3 +154,6 @@ SELECT
 	LastUpdateDate = GREATEST(UpdateByApp1Date, UpdateByApp2Date, UpdateByApp3Date)
 FROM
 	Company
+
+DROP TABLE IF EXISTS Company
+GO

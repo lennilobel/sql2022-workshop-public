@@ -132,8 +132,8 @@ SELECT
 SELECT 
 	CustomerID,
 	AccountNumber,
-	Contact.FirstName AS [Name.First],
-	Contact.LastName AS [Name.Last],
+	Person.FirstName AS [CustomerName.First],
+	Person.LastName AS [CustomerName.Last],
 	(SELECT SalesOrderID,
 			TotalDue,
 			OrderDate, 
@@ -149,7 +149,7 @@ SELECT
 	  FOR JSON PATH) AS OrderHeader
  FROM
 	Sales.Customer AS Customer
-	INNER JOIN Person.Person AS Contact ON Contact.BusinessEntityID = Customer.PersonID
+	INNER JOIN Person.Person ON Person.BusinessEntityID = Customer.PersonID
  WHERE
 	CustomerID BETWEEN 11001 AND 11002
  FOR JSON PATH
@@ -158,8 +158,8 @@ SELECT
 SELECT 
 	Customer.CustomerID,
 	Customer.AccountNumber,
-	Contact.FirstName AS [Name.First],
-	Contact.LastName AS [Name.Last],
+	Person.FirstName AS [CustomerName.First],
+	Person.LastName AS [CustomerName.Last],
 	OrderHeader.SalesOrderID,
 	OrderHeader.TotalDue,
 	OrderHeader.OrderDate, 
@@ -169,7 +169,7 @@ SELECT
 	OrderDetail.LineTotal
  FROM
 	Sales.Customer AS Customer
-	INNER JOIN Person.Person AS Contact ON Contact.BusinessEntityID = Customer.PersonID
+	INNER JOIN Person.Person ON Person.BusinessEntityID = Customer.PersonID
     INNER JOIN Sales.SalesOrderHeader AS OrderHeader ON OrderHeader.CustomerID = Customer.CustomerID
 	INNER JOIN Sales.SalesOrderDetail AS OrderDetail ON OrderDetail.SalesOrderID = OrderHeader.SalesOrderID
  WHERE
